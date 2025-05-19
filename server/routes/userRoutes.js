@@ -8,4 +8,7 @@ routes.route('/userSignIn')
 routes.route('/userLogIn')
     .post(userController.userLogIn)
 
+routes.route('/retrieveUserDetails')
+    .post(userController.getUserDetails)
+
 module.exports=routes

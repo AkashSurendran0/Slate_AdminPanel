@@ -87,7 +87,11 @@ function LoginForm() {
         if(result.success){
             const response=await axios.post('http://localhost:5222/userLogIn', result.formData)
             if(response.data.success){
-                localStorage.setItem('userToken', response.data.token)
+                const userData={
+                    token:response.data.token,
+                    email:response.data.email
+                }
+                localStorage.setItem('userInfo', JSON.stringify(userData))
                 toast.success(response.data.message)
                 navigate('/')
             }else{
@@ -102,7 +106,11 @@ function LoginForm() {
         if(result.success){
             const response=await axios.post('http://localhost:5222/userSignIn', result.formData)
             if(response.data.success){
-                localStorage.setItem('userToken', response.data.token)
+                const userData={
+                    token:response.data.token,
+                    email:response.data.email
+                }
+                localStorage.setItem('userInfo', JSON.stringify(userData))
                 toast.success(response.data.message)
                 navigate('/')
             }else{

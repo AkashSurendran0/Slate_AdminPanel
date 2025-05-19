@@ -5,30 +5,34 @@ import './main.scss'
 import {RouteToDashBoard,RouteToLogin} from './security/auth'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { store } from './store'
+import { Provider } from 'react-redux'
 
 function App() {
 
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route path='/login' element={
-            <RouteToDashBoard> 
-              <Login/>
-            </RouteToDashBoard> 
-            }/>
-          <Route path='/' element={
-            <RouteToLogin>
-              <Home/>
-            </RouteToLogin>
-            }/>
-        </Routes>
-        <ToastContainer
-          autoClose={1500}
-          pauseOnHover
-          theme='colored'
-        />
-      </BrowserRouter>
+      <Provider store={store}>
+        <BrowserRouter>
+          <Routes>
+            <Route path='/login' element={
+              <RouteToDashBoard> 
+                <Login/>
+              </RouteToDashBoard> 
+              }/>
+            <Route path='/' element={
+              <RouteToLogin>
+                <Home/>
+              </RouteToLogin>
+              }/>
+          </Routes>
+          <ToastContainer
+            autoClose={1500}
+            pauseOnHover
+            theme='colored'
+          />
+        </BrowserRouter>
+      </Provider>
     </>
   )
 }

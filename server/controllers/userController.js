@@ -21,7 +21,7 @@ const signInNewUser = async (req,res) =>{
                 password: hashedPass
             })
             const token=jwt.sign({email: email}, jwt_secret, {expiresIn:'1h'})
-            return res.json({success:true, message:'User created Successfully', token})
+            return res.json({success:true, message:'User created Successfully', email:email, token})
         } catch (error) {
             return res.json({success:false, message:'Server error occured'})
         }
@@ -41,7 +41,19 @@ const userLogIn = async (req,res) =>{
         const passMatch=await bcrypt.compare(password, existingUser.password)
         if(!passMatch) return res.json({success:false, message:'Invalid credentials'})
         const token=jwt.sign({email:email}, jwt_secret, {expiresIn:'1h'})
-        res.json({success:true, message:'User logged Successfully', token})
+        res.json({success:true, message:'User logged Successfully', email:email, token})
+    } catch (error) {
+        console.log(error)
+        res.json({success:false, message:'Internal Server Error'})
+    }
+}
+
+const getUserDetails = async (req,res) =>{
+    try {
+        const {email}=req.body
+        const userDetails=await users.findOne({email:email})
+        if(!userDetails) return res.json({success:false, message:'User not found. Please log in again'})
+        res.json({success:true, userDetails})
     } catch (error) {
         console.log(error)
         res.json({success:false, message:'Internal Server Error'})
@@ -50,5 +62,6 @@ const userLogIn = async (req,res) =>{
 
 module.exports={
     signInNewUser,
-    userLogIn
+    userLogIn,
+    getUserDetails
 }

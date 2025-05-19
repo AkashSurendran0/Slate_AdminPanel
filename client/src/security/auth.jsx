@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 
 export const RouteToLogin = ({children}) =>{
-    const token=localStorage.getItem('userToken')
+    const token=JSON.parse(localStorage.getItem('userInfo'))
     
     if(!token){
         console.log(token)
@@ -12,7 +12,7 @@ export const RouteToLogin = ({children}) =>{
 }
 
 export const RouteToDashBoard = ({children}) =>{
-    const token=localStorage.getItem('userToken')
+    const token=JSON.parse(localStorage.getItem('userInfo'))
 
     if(token){
         console.log(token)
