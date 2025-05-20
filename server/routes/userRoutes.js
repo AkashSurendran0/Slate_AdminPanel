@@ -11,4 +11,7 @@ routes.route('/userLogIn')
 routes.route('/retrieveUserDetails')
     .post(userController.getUserDetails)
 
+routes.route('/editUser')
+    .post(userController.editUser)
+
 module.exports=routes

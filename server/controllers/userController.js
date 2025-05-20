@@ -60,8 +60,36 @@ const getUserDetails = async (req,res) =>{
     }
 }
 
+const editUser = async (req,res)=>{
+    try {
+        const {name, email, gender, state, district, phone, image}=req.body
+        console.log(req.body)
+
+        try {
+            await users.updateOne(
+                {email:email},
+                {
+                    name:name,
+                    gender:gender,
+                    state:state,
+                    district:district,
+                    phone:phone,
+                    image:image
+                }
+            )
+            res.json({success:true, message:'User updated successfully'})
+        } catch (error) {
+            res.json({success:false, message:'Internal Server Error'})
+        }
+    } catch (error) {
+        console.log(error)
+        res.json({success:false, message:'Server error'})
+    }
+}
+
 module.exports={
     signInNewUser,
     userLogIn,
-    getUserDetails
+    getUserDetails,
+    editUser
 }
