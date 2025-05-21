@@ -6,7 +6,6 @@ const toggleSections = createSlice({
         dashboard:true,
         profile:false,
         users:false,
-        settings:false
     },
     reducers:{
         setSection:(state, action)=>{

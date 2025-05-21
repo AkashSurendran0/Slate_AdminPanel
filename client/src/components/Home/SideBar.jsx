@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { toggleSidebar } from '../../features/Home_Page/toggleSidebar'
 import { setSection } from '../../features/Home_Page/toggleSections'
-import { Menu, X, Home, UserCircle, Users, Settings } from 'lucide-react'
+import { Menu, X, Home, UserCircle, Users } from 'lucide-react'
 import { isTokenExpired } from '../../security/jwtValidator'
 import { useNavigate } from 'react-router-dom'
 import userContext from '../../context'
@@ -18,7 +18,6 @@ function SideBar() {
     const userItems = [
         { id: 'dashboard', icon: <Home size={20} />, name: 'Dashboard' },
         { id: 'profile', icon: <UserCircle size={20} />, name: 'Profile' },
-        { id: 'settings', icon: <Settings size={20} />, name: 'Settings' },
     ];
 
     const adminItem=[

@@ -3,7 +3,6 @@ import Navbar from "../components/Home/Navbar"
 import UserProfile from "../components/Home/UserProfile"
 import Dashboard from "../components/Home/Dashboard"
 import UserDetails from "../components/Home/UserDetails"
-import Settings from "../components/Home/Settings"
 import { useSelector } from "react-redux"
 import {useEffect, useState} from 'react'
 import axios from "axios"
@@ -13,6 +12,11 @@ import userContext from "../context"
 function Home() {
   const currentPage=useSelector((state)=>state.toggleSection)
   const [user, setUser]=useState()
+  const [refreshUsers, setRefresh]=useState(false)
+
+  const refresh = () =>{
+    setRefresh(!refreshUsers)
+  }
     
   useEffect(()=>{  
       const loggedUser=JSON.parse(localStorage.getItem('userInfo'))
@@ -25,10 +29,10 @@ function Home() {
               toast.error(response.data.message)
           }
       })
-  }, [])
+  }, [refreshUsers])
 
   return (
-    <userContext.Provider value={{user}}>
+    <userContext.Provider value={{user, refresh}}>
       <div className="flex h-screen bg-gray-100">
           <SideBar/>
           <div className="flex-1 flex flex-col overflow-hidden">
@@ -42,9 +46,6 @@ function Home() {
               ) }
               { currentPage.users && (
                 <UserDetails/>
-              ) }
-              { currentPage.settings && (
-                <Settings/>
               ) }
             </main>
           </div>

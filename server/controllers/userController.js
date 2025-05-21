@@ -62,6 +62,7 @@ const getUserDetails = async (req,res) =>{
 
 const editUser = async (req,res)=>{
     try {
+        console.log('hi')
         const {name, email, gender, state, district, phone, image}=req.body
         console.log(req.body)
 
@@ -69,16 +70,20 @@ const editUser = async (req,res)=>{
             await users.updateOne(
                 {email:email},
                 {
-                    name:name,
-                    gender:gender,
-                    state:state,
-                    district:district,
-                    phone:phone,
-                    image:image
+                    $set:{
+                        name:name,
+                        gender:gender,
+                        state:state,
+                        district:district,
+                        phone:phone,
+                        image:image
+                    }
                 }
+                
             )
             res.json({success:true, message:'User updated successfully'})
         } catch (error) {
+            console.log(error)
             res.json({success:false, message:'Internal Server Error'})
         }
     } catch (error) {
@@ -87,9 +92,61 @@ const editUser = async (req,res)=>{
     }
 }
 
+const getAllUserDetails = async (req,res) =>{
+    try {
+        const allUsers=await users.find()
+        res.json({success:true, allUsers:allUsers})
+    } catch (error) {
+        console.log(error)
+        res.json({success:false, message:'Internal Server Error'})
+    }
+}
+
+const deleteUser = async (req,res) => {
+    try {
+        console.log(req.body)
+        const {email}=req.body
+        console.log(email)
+        await users.deleteOne({email:email})
+        res.json({success:true, message:'User deleted Successfully'})
+    } catch (error) {
+        console.log(error)
+        res.json({success:false, message:'Internal Server Error'})
+    }
+}
+
+const alterAdmin = async (req, res) =>{
+    try {
+        const {email}=req.body
+        const user=await users.findOne({email:email})
+        if(user.isAdmin){
+            await users.updateOne(
+                {email:email},
+                {
+                    $set:{isAdmin:false}
+                }
+            )
+        }else{
+            await users.updateOne(
+                {email:email},
+                {
+                    $set:{isAdmin:true}
+                }
+            )
+        }
+        res.json({success:true, message:'Changes applied successfully'})
+    } catch (error) {
+        console.log(error)
+        res.json({success:false, message:'Internal server error'})
+    }
+}
+
 module.exports={
     signInNewUser,
     userLogIn,
     getUserDetails,
-    editUser
+    editUser,
+    getAllUserDetails,
+    deleteUser,
+    alterAdmin
 }

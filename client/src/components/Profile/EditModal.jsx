@@ -2,8 +2,11 @@ import { useState, useEffect } from 'react';
 import { X, Upload } from 'lucide-react';
 import { toast } from 'react-toastify';
 import axios from 'axios';
+import userContext from '../../context';
+import { useContext } from 'react';
 
 export default function EditUserModal({showModal, user}) {
+    const {refresh}=useContext(userContext)
     const [formData, setFormData] = useState({
         name: '',
         gender: '',
@@ -94,16 +97,18 @@ export default function EditUserModal({showModal, user}) {
         e.preventDefault();
         const response=validateForm()
         if(response.success){
-            const token=JSON.parse(localStorage.getItem('userInfo'))
-            formData.email=token.email
-            const editForm=new FormData()
-            editForm.append('file', formData.image)
-            editForm.append('upload_preset', 'Slate_dashboard')
-            const response=await axios.post(`https://api.cloudinary.com/v1_1/djhmcbiq9/image/upload`, editForm)
-            formData.image=response.data.secure_url
+            formData.email=user.email
+            if(formData.image){
+                const editForm=new FormData()
+                editForm.append('file', formData.image)
+                editForm.append('upload_preset', 'Slate_dashboard')
+                const response=await axios.post(`https://api.cloudinary.com/v1_1/djhmcbiq9/image/upload`, editForm)
+                formData.image=response.data.secure_url
+            }
             const submitResponse=await axios.post('http://localhost:5222/editUser', formData)
             if(submitResponse.data.success){
                 toast.success(submitResponse.data.message)
+                refresh()
                 handleClose();
             }else{
                 toast.error(submitResponse.data.message)

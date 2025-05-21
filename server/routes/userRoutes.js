@@ -10,8 +10,15 @@ routes.route('/userLogIn')
 
 routes.route('/retrieveUserDetails')
     .post(userController.getUserDetails)
+    .get(userController.getAllUserDetails)
 
 routes.route('/editUser')
     .post(userController.editUser)
+
+routes.route('/deleteUser')
+    .post(userController.deleteUser)
+
+routes.route('/appointAdmin')
+    .post(userController.alterAdmin)
 
 module.exports=routes
