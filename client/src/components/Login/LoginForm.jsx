@@ -124,9 +124,9 @@ function LoginForm() {
             { setLogin?  (
                 <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
                     <div className="w-full max-w-md bg-white rounded-lg shadow-lg overflow-hidden">
-                        <div className="bg-green-600 p-6">
+                        <div className="bg-gray-800 p-6">
                         <h2 className="text-2xl font-bold text-white text-center">Slate Control Panel</h2>
-                        <p className="text-green-200 text-center mt-2">Please sign in to your account</p>
+                        <p className="text-white text-center mt-2">Please sign in to your account</p>
                         </div>
                         
                         <form className="p-6 space-y-6" onSubmit={loginUser}>
@@ -176,7 +176,7 @@ function LoginForm() {
                         <div>
                             <button
                             type="submit"
-                            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:bg-green-400"
+                            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-800 hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:bg-green-400"
                             >
                                 Login
                             </button>
@@ -186,7 +186,7 @@ function LoginForm() {
                             <p className="text-sm text-gray-600">
                             Don't have an account?{' '}
                             </p>
-                            <p onClick={()=>dispatch(showSignIn())} className="font-medium text-green-600 hover:text-green-500 cursor-pointer">
+                            <p onClick={()=>dispatch(showSignIn())} className="font-medium hover:text-grey-500 cursor-pointer">
                                 Sign up now
                             </p>
                         </div>
@@ -197,9 +197,9 @@ function LoginForm() {
             ) : (
                 <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
                     <div className="w-full max-w-md bg-white rounded-lg shadow-lg overflow-hidden">
-                        <div className="bg-green-600 p-6">
+                        <div className="bg-gray-800 p-6">
                         <h2 className="text-2xl font-bold text-white text-center">Slate Control Panel</h2>
-                        <p className="text-green-200 text-center mt-2">Please create a new account</p>
+                        <p className="text-white text-center mt-2">Please create a new account</p>
                         </div>
                         
                         <form className="p-6 space-y-6" onSubmit={signUpUser}>
@@ -284,7 +284,7 @@ function LoginForm() {
                             <div>
                                 <button
                                 type="submit"
-                                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:bg-green-400"
+                                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-800 hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:bg-green-400"
                                 >
                                     Sign Up
                                 </button>
@@ -294,7 +294,7 @@ function LoginForm() {
                                 <p className="text-sm text-gray-600">
                                 Already have a account?{' '}
                                 </p>
-                                <p onClick={()=>dispatch(showLogin())} className="font-medium text-green-600 hover:text-green-500 cursor-pointer">
+                                <p onClick={()=>dispatch(showLogin())} className="font-medium hover:text-grey-500 cursor-pointer">
                                     Log In now
                                 </p>
                             </div>
